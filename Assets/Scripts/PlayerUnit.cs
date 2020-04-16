@@ -108,15 +108,15 @@ public class PlayerUnit : NetworkBehaviour
             Debug.Log("first player");
             m_Manager.player1 = this.gameObject;
             camNum = 1;
-            m_Manager.CreateArrow(gameObject, -5, 1);
-            m_Manager.SetCamActive(1, gameObject);
+            m_Manager.SetCamActive(camNum, gameObject);
+            m_Manager.CreateArrow(gameObject, -5, camNum);
         }
         else if (m_Manager.player2 == null)
         {
             m_Manager.player2 = this.gameObject;
             camNum = 2;
-            m_Manager.CreateArrow(gameObject, +5, 2);
-            m_Manager.SetCamActive(2, gameObject);
+            m_Manager.SetCamActive(camNum, gameObject);
+            m_Manager.CreateArrow(gameObject, +5, camNum);
         }
     }
 

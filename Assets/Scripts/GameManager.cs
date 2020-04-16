@@ -95,7 +95,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void CreateArrow(GameObject target, int i, int arrowNum)
+    public void CreateArrow(GameObject target, int offset, int arrowNum)
     {
         Debug.Log("making arrow now");
         var newArrow = new GameObject();
@@ -105,7 +105,26 @@ public class GameManager : NetworkBehaviour
         newArrow.AddComponent<SpriteRenderer>();
         newArrow.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Arrow");
         newArrow.GetComponent<SpriteRenderer>().color = Color.black;
-        newArrow.transform.position = new Vector3(Screen.width/2 + i, Screen.height/2, 0 );
+        newArrow.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+        var thisCam = new GameObject();
+        switch (arrowNum - 1)
+        {
+            case 0: // if cam is 1
+                thisCam = cam1;
+                break;
+            case 1: // if cam is 2
+                thisCam = cam2;
+                break;
+        }
+        
+        Vector3 coordinates = new Vector3(Screen.width + offset, Screen.height/2, 0);
+        newArrow.transform.position = new Vector3(thisCam.GetComponent<Camera>().ScreenToWorldPoint(coordinates).x, thisCam.GetComponent<Camera>().ScreenToWorldPoint(coordinates).y, 0 );
+
+        newArrow.AddComponent<CamFollow>();
+        newArrow.GetComponent<CamFollow>().player = target.transform;
+        newArrow.GetComponent<CamFollow>().distanceFromPlayer = 6;
+        newArrow.GetComponent<CamFollow>().lerpSpeed = .7f;
     }
 
     public void SetCamActive(int i, GameObject player)

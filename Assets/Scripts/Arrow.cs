@@ -11,6 +11,7 @@ public class Arrow : MonoBehaviour
     void Start()
     {
         m_Transform = gameObject.transform;
+          
     }
 
     void Update()

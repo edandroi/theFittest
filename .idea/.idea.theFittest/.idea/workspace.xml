@@ -28,10 +28,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/CamFollow.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerObject.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerBehaviour.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow.cs" />
         <option value="$PROJECT_DIR$/Library/PackageCache/com.unity.ide.rider@1.1.4/Rider/Editor/RiderInitializer.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/PlayerUnit.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Arrow.cs" />
       </list>
     </option>
   </component>
@@ -85,7 +85,7 @@
       <workItem from="1586978642388" duration="3112000" />
       <workItem from="1586990826364" duration="606000" />
       <workItem from="1586991959929" duration="158000" />
-      <workItem from="1586995927648" duration="2678000" />
+      <workItem from="1586995927648" duration="4019000" />
     </task>
     <servers />
   </component>
