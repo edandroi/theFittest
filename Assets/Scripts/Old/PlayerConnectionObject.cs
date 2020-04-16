@@ -36,7 +36,9 @@ public class PlayerConnectionObject : NetworkBehaviour {
     // are automatically informed of the new value.
     [SyncVar(hook="OnPlayerNameChanged")]
     public string PlayerName = "Anonymous";
-	
+
+
+    private bool unitSpawned = false;
 	// Update is called once per frame
 	void Update () {
 		// Remember: Update runs on EVERYONE's computer, whether or not they own this
@@ -47,10 +49,12 @@ public class PlayerConnectionObject : NetworkBehaviour {
             return;
         }
 
+        /*
         if( Input.GetKeyDown(KeyCode.S) )
         {
             CmdSpawnMyUnit();
         }
+        */
 
         if( Input.GetKeyDown(KeyCode.Q) )
         {

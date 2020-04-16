@@ -11,6 +11,14 @@ public class PlayerUnit : NetworkBehaviour
 {
     public GameManager m_Manager;
     private int camNum = 0;
+
+    public bool isShot = false;
+    
+    
+    // Player Movement Variables
+    
+    
+    
 	void Start ()
     {
         m_Manager = FindObjectOfType<GameManager>();
@@ -61,7 +69,7 @@ public class PlayerUnit : NetworkBehaviour
 
 
         // If we get to here, we are the authoritative owner of this object
-        transform.Translate( velocity * Time.deltaTime );
+//        transform.Translate( velocity * Time.deltaTime );
 
 
         if( Input.GetKeyDown(KeyCode.Space) )
@@ -69,21 +77,46 @@ public class PlayerUnit : NetworkBehaviour
             this.transform.Translate( 0, 1, 0 );
         }
 
-        if(Input.GetKeyDown(KeyCode.D))
-        {
-            Destroy(gameObject);
-        }
-
         if( /* some input */ true )
         {
             // The player is asking us to change our direction/speed (i.e. velocity)
 
+            /*
             velocity = new Vector3(1, 0, 0);
 
             CmdUpdateVelocity(velocity, transform.position);
+            */
         }
 
 	}
+    
+    void PlayerMovement()
+    {
+        if (Input.GetKey(right))
+        {
+            rb.AddTorque(-torque );
+        }
+        
+        if (Input.GetKey(left))
+        {
+            rb.AddTorque(torque );
+        }
+        
+        
+        if (Input.GetKey(forward))
+        {
+            if (gameObject.CompareTag("Player1"))
+                rb.AddForce(transform.right * jumpSpeed);
+        
+            if (gameObject.CompareTag("Player2"))
+                rb.AddForce(transform.right * jumpSpeed * -1f);
+                
+        } 
+        Vector2 v = rb.velocity;
+        
+        if(v.magnitude > maxVelocity)
+            rb.velocity = v.normalized * maxVelocity;
+    }
 
     [Command]
     void CmdUpdateVelocity( Vector3 v, Vector3 p)
@@ -105,7 +138,6 @@ public class PlayerUnit : NetworkBehaviour
     {
         if (m_Manager.player1 == null)
         {
-            Debug.Log("first player");
             m_Manager.player1 = this.gameObject;
             camNum = 1;
             m_Manager.SetCamActive(camNum, gameObject);
@@ -142,7 +174,7 @@ public class PlayerUnit : NetworkBehaviour
         //  transform.position = p + (v * (ourLatency))
 
         //transform.position = p;
-
+        
         velocity = v;
         bestGuessPosition = p + (velocity * (ourLatency));
 

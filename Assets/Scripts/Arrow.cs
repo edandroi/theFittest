@@ -10,14 +10,17 @@ public class Arrow : MonoBehaviour
     private Vector3 dir;
     void Start()
     {
+        // to be used by cam shake
         m_Transform = gameObject.transform;
           
     }
 
     void Update()
     {
+   
         dir = targetObj.position - transform.position;
        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+      
     }
 }

@@ -37,16 +37,18 @@ public class CamShake : MonoBehaviour
     {
         originalPos = camTransform.localPosition;
 
-        if (player.GetComponent<Player>().isShot)
+        if (player.GetComponent<PlayerUnit>().isShot)
             shakingNow = true;
         
         if (shakingNow)
             CamShaking();
 
+        /*
         if (player.GetComponent<Player>().health <= 3)
         {
             m_PostPro.profile = m_ProfileDead;
         }
+        */
     }
 
     void CamShaking()

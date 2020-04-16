@@ -95,9 +95,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    // create corresponding arrow as players join
     public void CreateArrow(GameObject target, int offset, int arrowNum)
     {
-        Debug.Log("making arrow now");
         var newArrow = new GameObject();
         newArrow.name = "Arrow" + arrowNum;
         newArrow.AddComponent<Arrow>();
@@ -124,20 +124,25 @@ public class GameManager : NetworkBehaviour
         newArrow.AddComponent<CamFollow>();
         newArrow.GetComponent<CamFollow>().player = target.transform;
         newArrow.GetComponent<CamFollow>().distanceFromPlayer = 6;
+        newArrow.GetComponent<CamFollow>().zValue = 0;
         newArrow.GetComponent<CamFollow>().lerpSpeed = .7f;
     }
 
-    public void SetCamActive(int i, GameObject player)
+    
+    //Set corresponding cam active as players join
+    public void SetCamActive(int i, GameObject player) 
     {
         i -= 1;
         switch (i) //cam1
         {
             case 0:
                 cam1.GetComponent<CamFollow>().player = player.transform;
+                cam1.GetComponent<CamShake>().player = player;
                 cam1.SetActive(true);
                 break;
             case 1:
                 cam2.GetComponent<CamFollow>().player = player.transform;
+                cam2.GetComponent<CamShake>().player = player;
                 cam2.SetActive(true);
                 break;
         }
