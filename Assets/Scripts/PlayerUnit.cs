@@ -16,13 +16,25 @@ public class PlayerUnit : NetworkBehaviour
     
     
     // Player Movement Variables
+    public KeyCode right = KeyCode.RightArrow;
+    public KeyCode left = KeyCode.LeftArrow;
+    public KeyCode forward = KeyCode.UpArrow;
+//    public KeyCode rotating;
+    public KeyCode shoot = KeyCode.Space;
+
+    float speed = 300;
+    public float torque = 15;
+    public float maxVelocity = 20f;
+    public int health = 20;
     
-    
+    private Rigidbody2D rb;
     
 	void Start ()
     {
         m_Manager = FindObjectOfType<GameManager>();
         CmdTellTheManager(); // tell the manager I am one of the players
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     Vector3 velocity;
@@ -70,12 +82,7 @@ public class PlayerUnit : NetworkBehaviour
 
         // If we get to here, we are the authoritative owner of this object
 //        transform.Translate( velocity * Time.deltaTime );
-
-
-        if( Input.GetKeyDown(KeyCode.Space) )
-        {
-            this.transform.Translate( 0, 1, 0 );
-        }
+        PlayerMovement();
 
         if( /* some input */ true )
         {
@@ -102,15 +109,9 @@ public class PlayerUnit : NetworkBehaviour
             rb.AddTorque(torque );
         }
         
-        
         if (Input.GetKey(forward))
         {
-            if (gameObject.CompareTag("Player1"))
-                rb.AddForce(transform.right * jumpSpeed);
-        
-            if (gameObject.CompareTag("Player2"))
-                rb.AddForce(transform.right * jumpSpeed * -1f);
-                
+            rb.AddForce(transform.right * speed);
         } 
         Vector2 v = rb.velocity;
         
