@@ -178,6 +178,7 @@
           <e p="CamShake.cs" t="Include" />
           <e p="DebugMe.cs" t="Include" />
           <e p="GameManager.cs" t="Include" />
+          <e p="NetworkConnector.cs" t="Include" />
           <e p="Old" t="Include">
             <e p="Player.cs" t="Include" />
             <e p="PlayerConnectionObject.cs" t="Include" />

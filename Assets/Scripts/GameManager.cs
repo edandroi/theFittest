@@ -29,8 +29,8 @@ public class GameManager : NetworkBehaviour
         // set both cams inactive until players are in
         cam1 = GameObject.Find("Cam1");
         cam2 = GameObject.Find("Cam2");
-        cam1.SetActive(false);
-        cam2.SetActive(false);
+//        cam1.SetActive(false);
+//        cam2.SetActive(false);
         
         
         rightTxt = GameObject.Find("Right2").GetComponent<Text>();
@@ -128,7 +128,6 @@ public class GameManager : NetworkBehaviour
         newArrow.GetComponent<CamFollow>().lerpSpeed = .7f;
     }
 
-    
     //Set corresponding cam active as players join
     public void SetCamActive(int i, GameObject player) 
     {
@@ -148,4 +147,6 @@ public class GameManager : NetworkBehaviour
         }
         
     }
+    
+
 }

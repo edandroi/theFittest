@@ -13,8 +13,8 @@ public class PlayerUnit : NetworkBehaviour
     private int camNum = 0;
 
     public bool isShot = false;
-    
-    
+    public bool playerDead = false;
+
     // Player Movement Variables
     public KeyCode right = KeyCode.RightArrow;
     public KeyCode left = KeyCode.LeftArrow;
@@ -32,9 +32,8 @@ public class PlayerUnit : NetworkBehaviour
 	void Start ()
     {
         m_Manager = FindObjectOfType<GameManager>();
-        CmdTellTheManager(); // tell the manager I am one of the players
-
         rb = GetComponent<Rigidbody2D>();
+        CmdTellTheManager(); // tell the manager I am one of the players
     }
 
     Vector3 velocity;
@@ -140,6 +139,7 @@ public class PlayerUnit : NetworkBehaviour
         if (m_Manager.player1 == null)
         {
             m_Manager.player1 = this.gameObject;
+            SpawnPoint(1);
             camNum = 1;
             m_Manager.SetCamActive(camNum, gameObject);
             m_Manager.CreateArrow(gameObject, -5, camNum);
@@ -147,10 +147,13 @@ public class PlayerUnit : NetworkBehaviour
         else if (m_Manager.player2 == null)
         {
             m_Manager.player2 = this.gameObject;
+            SpawnPoint(2);
             camNum = 2;
             m_Manager.SetCamActive(camNum, gameObject);
             m_Manager.CreateArrow(gameObject, +5, camNum);
         }
+        else
+            return;
     }
 
     [ClientRpc]
@@ -184,6 +187,26 @@ public class PlayerUnit : NetworkBehaviour
 
         // IN FACT, we don't want to directly update transform.position, because then 
         // players will keep teleporting/blinking as the updates come in. It looks dumb.
+    }
+    
+    private float xVal;
+    private float yVal;
+    private Vector3 spawnPoint;
+    void SpawnPoint(int playerNum)
+    {
+        int i = playerNum;
+        yVal = Random.Range(18f, 85f);
+        if (i == 1) // Player 1
+        {
+            xVal = Random.Range(30f, 75f);    
+        }
+        
+        if (i == 2) //Player 2
+        {
+            xVal = Random.Range(105f, 150f);
+        }
+        spawnPoint = new Vector3(xVal, yVal, transform.position.z);
+        transform.position = new Vector3(xVal, yVal, transform.position.z);
     }
 
 

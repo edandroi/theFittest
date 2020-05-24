@@ -24,8 +24,6 @@ public class PlayerConnectionObject : NetworkBehaviour {
         // the network (and therefore not on any other client) UNLESS
         // NetworkServer.Spawn() is called on this object.
 
-        //Instantiate(PlayerUnitPrefab);
-
         // Command (politely) the server to SPAWN our unit
         CmdSpawnMyUnit();
 	}
